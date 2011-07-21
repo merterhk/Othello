@@ -1,0 +1,148 @@
+    public int controlUp(int p, int x, int y, int count, boolean reverse) {
+        y--; // Yukarıyı kontrol et.
+        if (y <= 0 || board[x][y].type == p) { // Dışarı çıktıysa veya boş ise dur
+            return count;
+        }
+
+        if (board[x][y].isFresh) {
+            return 0;
+        }
+
+        if (!board[x][y].isFresh && board[x][y].type != p) { // Farklıysa devam et
+            count += 1;
+            if (reverse) {
+                board[x][y].set(p);
+            }
+            return controlUp(p, x, y, count, reverse);
+        }
+        return -1; // Hatalı durum
+    }
+
+    public int controlDown(int p, int x, int y, int count, boolean reverse) {
+        y++;
+        if (y >= 7 || board[x][y].type == p) {
+            return count;
+        }
+
+        if (board[x][y].isFresh) {
+            return 0;
+        }
+
+        if (!board[x][y].isFresh && board[x][y].type != p) { // Farklıysa devam et
+            count += 1;
+            if (reverse) {
+                board[x][y].set(p);
+            }
+            return controlDown(p, x, y, count, reverse);
+        }
+        return -1; // Hatalı durum
+    }
+
+    public int controlLeft(int p, int x, int y, int count, boolean reverse) {
+        x--;
+        if (x <= 0 || board[x][y].type == p) {
+            return count;
+        }
+
+        if (board[x][y].isFresh) {
+            return 0;
+        }
+
+        if (!board[x][y].isFresh && board[x][y].type != p) {
+            count += 1;
+            if (reverse) {
+                board[x][y].set(p);
+            }
+            return controlLeft(p, x, y, count,reverse);
+        }
+        return -1; // Hatalı durum
+    }
+
+    public int controlRight(int p, int x, int y, int count, boolean reverse) {
+        x++; // Sağı kontrol et
+        if (x >= 7 || board[x][y].type == p) { // Dışarı çıktıysa veya kendisi ise dur
+            return count;
+        }
+
+        if (board[x][y].isFresh) {
+            return 0;
+        }
+
+        if (!board[x][y].isFresh && board[x][y].type != p) { // Farklıysa devam et
+            count += 1;
+            return controlRight(p, x, y, count);
+        }
+        return -1; // Hatalı durum
+    }
+
+    public int controlUpRight(int p, int x, int y, int count, boolean reverse) {
+        y--; // Yukarı
+        x++; // Sağ
+        if (x >= 7 || y <= 0 || board[x][y].type == p) { // Dışarı çıktıysa veya kendisi ise dur
+            return count;
+        }
+
+        if (board[x][y].isFresh) {
+            return 0;
+        }
+
+        if (!board[x][y].isFresh && board[x][y].type != p) { // Farklıysa devam et
+            count += 1;
+            return controlUpRight(p, x, y, count);
+        }
+        return -1; // Hatalı durum
+    }
+
+    public int controlUpLeft(int p, int x, int y, int count, boolean reverse) {
+        y--; // Yukarı
+        x--; // Sol
+        if (x <= 0 || y <= 0 || board[x][y].type == p) { // Dışarı çıktıysa veya kendisi ise dur
+            return count;
+        }
+
+        if (board[x][y].isFresh) {
+            return 0;
+        }
+
+        if (!board[x][y].isFresh && board[x][y].type != p) { // Farklıysa devam et
+            count += 1;
+            return controlUpLeft(p, x, y, count);
+        }
+        return -1; // Hatalı durum
+    }
+
+    public int controlDownLeft(int p, int x, int y, int count, boolean reverse) {
+        y++; // Ağaşı
+        x--; // Sol
+        if (x <= 0 || y >= 7 || board[x][y].type == p) { // Dışarı çıktıysa veya kendisi ise dur
+            return count;
+        }
+
+        if (board[x][y].isFresh) {
+            return 0;
+        }
+
+        if (!board[x][y].isFresh && board[x][y].type != p) { // Farklıysa devam et
+            count += 1;
+            return controlDownLeft(p, x, y, count);
+        }
+        return -1; // Hatalı durum
+    }
+
+    public int controlDownRight(int p, int x, int y, int count, boolean reverse) {
+        y++; // Yukarı
+        x++; // Sağ
+        if (x >= 7 || y >= 7 || board[x][y].type == p) { // Dışarı çıktıysa veya kendisi ise dur
+            return count;
+        }
+
+        if (board[x][y].isFresh) {
+            return 0;
+        }
+
+        if (!board[x][y].isFresh && board[x][y].type != p) { // Farklıysa devam et
+            count += 1;
+            return controlDownRight(p, x, y, count);
+        }
+        return -1; // Hatalı durum
+    }
